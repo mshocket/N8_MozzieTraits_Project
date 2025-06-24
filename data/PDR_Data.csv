@@ -1,0 +1,115 @@
+Ref,trait.name,T.C,T.K,trait,ErrorPosSI,ErrorNegSI,Trait2.name,Trait,host.code,paras.code,Citation,Figure,Notes,joint.code,Increasing
+fromNumazu_11,EIP,10,283.15,1000,NA,NA,NA,NA,Ctar,SLEV,Reisen_1993_J_Med_Entomology,Figure 1,No mosquitoes transmitted during experiment,CtarSLEV,Yes
+fromNumazu_11,EIP,15,288.15,72,NA,NA,NA,NA,Ctar,SLEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarSLEV,Yes
+fromNumazu_11,EIP,20,293.15,21,NA,NA,NA,NA,Ctar,SLEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarSLEV,Yes
+fromNumazu_11,EIP,25,298.15,10,NA,NA,NA,NA,Ctar,SLEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarSLEV,Yes
+fromNumazu_11,EIP,30,303.15,7,NA,NA,NA,NA,Ctar,SLEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarSLEV,Yes
+fromNumazu_9,EIP,10,283.15,24,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+fromNumazu_9,EIP,15,288.15,13,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+fromNumazu_9,EIP,18,291.15,12,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+fromNumazu_9,EIP,20,293.15,10,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+fromNumazu_9,EIP,25,298.15,7,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+fromNumazu_9,EIP,30,303.15,4,NA,NA,NA,NA,Ctar,WEEV,Reisen_1993_J_Med_Entomology,Figure 1,,CtarWEEV,Yes
+Verwillow_25,EIP,10,283.15,1000,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,No mosquitoes transmitted during experiment (110 days),CtarWNV,Yes
+Verwillow_25,EIP,14,287.15,36,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,,CtarWNV,Yes
+Verwillow_25,EIP,18,291.15,26,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,,CtarWNV,Yes
+Verwillow_25,EIP,22,295.15,17,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,,CtarWNV,Yes
+Verwillow_25,EIP,26,299.15,9,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,,CtarWNV,Yes
+Verwillow_25,EIP,30,303.15,7,NA,NA,NA,NA,Ctar,WNV,Reisen_2006_JMedEntomol,Figure 4,,CtarWNV,Yes
+fromMariano114,EIP,18,291.15,19,NA,NA,NA,NA,Ctar,WEEV,Kramer_et_al_1983_AmJTropMedHyg,Figure 2,,CtarWEEV,Yes
+fromMariano115,EIP,25,298.15,12,NA,NA,NA,NA,Ctar,WEEV,Kramer_et_al_1983_AmJTropMedHyg,Figure 2,,CtarWEEV,Yes
+fromMariano116,EIP,32,305.15,6,NA,NA,NA,NA,Ctar,WEEV,Kramer_et_al_1983_AmJTropMedHyg,Figure 2,,CtarWEEV,Yes
+Verwillow_8,EIP,15,288.15,28,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,WN02-1956 strain of WNV,CpipWNV,Yes
+Verwillow_8,EIP,18,291.15,28,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,WN02-1956 strain of WNV,CpipWNV,Yes
+Verwillow_8,EIP,22,295.15,24,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,WN02-1956 strain of WNV,CpipWNV,Yes
+Verwillow_8,EIP,32,305.15,4,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,WN02-1956 strain of WNV,CpipWNV,Yes
+Verwillow_9,EIP,15,288.15,28,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,NY99-3356 strain of WNV,CpipWNV,Yes
+Verwillow_9,EIP,18,291.15,28,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,NY99-3356 strain of WNV,CpipWNV,Yes
+Verwillow_9,EIP,22,295.15,31,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,NY99-3356 strain of WNV,CpipWNV,Yes
+Verwillow_9,EIP,32,305.15,6,days,NA,NA,NA,Cpip,WNV,Kilpatrick_2008_PLOSPathogens,Figure 1,NY99-3356 strain of WNV,CpipWNV,Yes
+fromShocket_107,EIP,21.1,294.25,13,days,NA,NA,NA,Atri,EEEV,Chamberlain&Sudia_1995_AmJEpi,Figure 4,,AtriEEEV,Yes
+fromShocket_107,EIP,26.7,299.85,10,days,NA,NA,NA,Atri,EEEV,Chamberlain&Sudia_1995_AmJEpi,Figure 4,,AtriEEEV,Yes
+fromShocket_107,EIP,32.2,305.35,6,days,NA,NA,NA,Atri,EEEV,Chamberlain&Sudia_1995_AmJEpi,Figure 4,,AtriEEEV,Yes
+fromNumazu_19,EIP,10,283.15,28,days,NA,NA,NA,Atae,SINV,Turell_&_Lundstrom_1990_AmericanJofTropicalMedicineandHygiene,Figure 3,,AtaeSINV,Yes
+fromNumazu_19,EIP,17,290.15,14,days,NA,NA,NA,Atae,SINV,Turell_&_Lundstrom_1990_AmericanJofTropicalMedicineandHygiene,Figure 3,,AtaeSINV,Yes
+fromNumazu_19,EIP,24,297.15,14,days,NA,NA,NA,Atae,SINV,Turell_&_Lundstrom_1990_AmericanJofTropicalMedicineandHygiene,Figure 3,,AtaeSINV,No
+fromNumazu_35,EIP,13,286.15,21,days,NA,NA,NA,Atae,RVFV,Turell_Rossi_Bailey_1985_AmJTropMedHyg,Figure 7,,AtaeRVFV,Yes
+fromNumazu_35,EIP,26,299.15,3,days,NA,NA,NA,Atae,RVFV,Turell_Rossi_Bailey_1985_AmJTropMedHyg,Figure 7,,AtaeRVFV,Yes
+fromNumazu_35,EIP,33,306.15,3,days,NA,NA,NA,Atae,RVFV,Turell_Rossi_Bailey_1985_AmJTropMedHyg,Figure 7,,AtaeRVFV,No
+fromVerwillow_13,EIP,18,291.15,25,days,NA,NA,NA,Cpip,WNV,Dohm_2002_JMedEntomol,Figure 1,,CpipWNV,Yes
+fromVerwillow_13,EIP,20,293.15,14,days,NA,NA,NA,Cpip,WNV,Dohm_2002_JMedEntomol,Figure 1,,CpipWNV,Yes
+fromVerwillow_13,EIP,26,299.15,11,days,NA,NA,NA,Cpip,WNV,Dohm_2002_JMedEntomol,Figure 1,,CpipWNV,Yes
+fromVerwillow_13,EIP,30,303.15,6,days,NA,NA,NA,Cpip,WNV,Dohm_2002_JMedEntomol,Figure 1,,CpipWNV,Yes
+fromVerwillow_23,EIP,14,287.15,36,days,NA,NA,NA,Cuni,WNV,Cornel_1993_JMedEntom,Figure 4,,CuniWNV,Yes
+fromVerwillow_24,EIP,18,291.15,17,days,NA,NA,NA,Cuni,WNV,Cornel_1993_JMedEntom,Figure 4,,CuniWNV,Yes
+fromVerwillow_25,EIP,26,299.15,11,days,NA,NA,NA,Cuni,WNV,Cornel_1993_JMedEntom,Figure 4,,CuniWNV,Yes
+fromVerwillow_26,EIP,30,303.15,13,days,NA,NA,NA,Cuni,WNV,Cornel_1993_JMedEntom,Figure 4,,CuniWNV,No
+Shocket,EIP,15,288.15,1000,days,NA,NA,NA,Cqui,WNV,Paull_2017_ProcB,Figure 1,,CquiWNV,Yes
+Shocket,EIP,20,293.15,1000,days,NA,NA,NA,Cqui,WNV,Paull_2017_ProcB,Figure 1,,CquiWNV,Yes
+Shocket,EIP,24,297.15,28,days,NA,NA,NA,Cqui,WNV,Paull_2017_ProcB,Figure 1,,CquiWNV,Yes
+Shocket,EIP,27,300.15,14,days,NA,NA,NA,Cqui,WNV,Paull_2017_ProcB,Figure 1,,CquiWNV,Yes
+Shocket,EIP,32,305.15,10,days,NA,NA,NA,Cqui,WNV,Paull_2017_ProcB,Figure 1,,CquiWNV,Yes
+JohnsonPub,PDR,23,296.15,0.066666667,1/days,NA,NA,NA,Anspp,Pfal,Eling et al 2001,,,AnPfal,Yes
+JohnsonPub,PDR,26,299.15,0.090909091,1/days,NA,NA,NA,Anspp,Pfal,Eling et al 2001,,,AnPfal,Yes
+JohnsonPub,PDR,28,301.15,0.111111111,1/days,NA,NA,NA,Anspp,Pfal,Eling et al 2001,,,AnPfal,Yes
+JohnsonPub,PDR,21.1,294.25,0.071428571,1/days,NA,NA,NA,Anspp,Pfal,Siddons 1944,,,AnPfal,Yes
+JohnsonPub,PDR,26.7,299.85,0.083333333,1/days,NA,NA,NA,Anspp,Pfal,Siddons 1944,,,AnPfal,Yes
+JohnsonPub,PDR,25,298.15,0.1,1/days,NA,NA,NA,Anspp,Pfal,Shute and Maryon 1952,,,AnPfal,Yes
+JohnsonPub,PDR,21.1,294.25,0.071428571,1/days,NA,NA,NA,Anspp,Pfal,Knowles and Basu 1943,,,AnPfal,Yes
+JohnsonPub,PDR,26.7,299.85,0.1,1/days,NA,NA,NA,Anspp,Pfal,Knowles and Basu 1943,,,AnPfal,Yes
+JohnsonPub,PDR,32.2,305.35,0.111111111,1/days,NA,NA,NA,Anspp,Pfal,Knowles and Basu 1943,,,AnPfal,No
+JohnsonPub,PDR,27,300.15,0.076923077,1/days,NA,NA,NA,Anspp,Pfal,Vaughan et al 1992,,,AnPfal,Yes
+JohnsonPub,PDR,22,295.15,0.045454545,1/days,NA,NA,NA,Anspp,Pfal,Boyd and Stratman-Thomas 1933,,,AnPfal,Yes
+JohnsonPub,PDR,15.3,288.45,0,1/days,NA,NA,NA,Anspp,Pfal,Siddons 1944,,,AnPfal,Yes
+JohnsonPub,PDR,34.4,307.55,0,1/days,NA,NA,NA,Anspp,Pfal,Siddons 1944,,,AnPfal,No
+MordecaiPub,PDR,22,295.15,0.04,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,PDR,24,297.15,0.05,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,PDR,26,299.15,0.07,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,PDR,28,301.15,0.08,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,PDR,30,303.15,0.1,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,PDR,32,305.15,0.12,1/days,NA,NA,NA,Aaeg,DENV,Focks_Barrera_2006_Research&TrainingTropicalDis_Geneva_Paper,,,AaegDENV,Yes
+MordecaiPub,EIP,12.7926332,285.9426332,32.08600286,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,13.0444544,286.1944544,25.01977202,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,23.75322701,296.903227,19.97458055,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,23.89829743,297.0482974,13.33765053,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,23.95725071,297.1072507,10.19770814,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,30.04481175,303.1948118,12.0545853,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,28.946104,302.096104,4.932424425,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,31.93480856,305.0848086,6.96737072,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,34.37511156,307.5251116,4.941796485,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,34.95802345,308.1080235,4.792448176,days,NA,NA,NA,Aaeg,DENV,Focks_et_al_1995_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,30,303.15,25,days,NA,NA,NA,Aaeg,DENV,Watts_et_al_1987_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,32,305.15,7,days,NA,NA,NA,Aaeg,DENV,Watts_et_al_1987_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,35,308.15,7,days,NA,NA,NA,Aaeg,DENV,Watts_et_al_1987_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,30,303.15,12,days,NA,NA,NA,Aaeg,DENV,Watts_et_al_1987_AJTMH,,,AaegDENV,Yes
+MordecaiPub,EIP,32.22,305.37,6,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,26.67,299.82,13,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,12.78,285.93,35,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,35,308.15,5.5,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,32.22,305.37,6,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,23.89,297.04,6,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,12.78,285.93,13,days,NA,NA,NA,Aaeg,DENV,McLean_et_al_1974_CanJMicobiol,,,AaegDENV,Yes
+MordecaiPub,EIP,13,286.15,32,days,NA,NA,NA,Aaeg,DENV,McLeah_et_al_1975_MosquitoNews,,,AaegDENV,Yes
+MordecaiPub,EIP,21,294.15,32,days,NA,NA,NA,Aaeg,DENV,McLeah_et_al_1975_MosquitoNews,,,AaegDENV,Yes
+MordecaiPub,PDR,23.4,296.55,0.09091,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,PDR,36,309.15,0.2,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,PDR,8,281.15,0,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,PDR,36,309.15,0.2,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,PDR,31,304.15,0.16667,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,PDR,21,294.15,0.05556,1/days,NA,NA,NA,Aaeg,DENV,Davis_1932_AmJEpidemiology,,,AaegDENV,Yes
+MordecaiPub,EIP,20,293.15,29.6,days,NA,NA,NA,Aaeg,DENV,Carrington_et_al_2013_PNTD,,,AaegDENV,Yes
+MordecaiPub,EIP,26,299.15,11.1,days,NA,NA,NA,Aaeg,DENV,Carrington_et_al_2013_PNTD,,,AaegDENV,Yes
+MordecaiPub,EIP,30,303.15,5.16,days,NA,NA,NA,Aaeg,DENV,Carrington_et_al_2013_PNTD,,,AaegDENV,Yes
+MordecaiPub,EIP,35,308.15,5.16,days,NA,NA,NA,Aaeg,DENV,Carrington_et_al_2013_PNTD,,,AaegDENV,Yes
+MordecaiPub,EIP,21,294.15,10,days,NA,NA,NA,Aalb,DENV,Xiao_et_al_2014_Arch Virol,,,AalbDENV,Yes
+MordecaiPub,EIP,26,299.15,7,days,NA,NA,NA,Aalb,DENV,Xiao_et_al_2014_Arch Virol,,,AalbDENV,Yes
+MordecaiPub,EIP,31,304.15,4,days,NA,NA,NA,Aalb,DENV,Xiao_et_al_2014_Arch Virol,,,AalbDENV,Yes
+MordecaiPub,EIP,36,309.15,4,days,NA,NA,NA,Aalb,DENV,Xiao_et_al_2014_Arch Virol,,,AalbDENV,No
+Shocket,EIP,18,291.15,5,days,NA,NA,NA,Ovig,RRV,Kay_&_Jennings_2002_J_Med_Entom,,,OvigRRV,Yes
+Shocket,EIP,25,298.15,4,days,NA,NA,NA,Ovig,RRV,Kay_&_Jennings_2002_J_Med_Entom,,,OvigRRV,Yes
+Shocket,EIP,32,305.15,3,days,NA,NA,NA,Ovig,RRV,Kay_&_Jennings_2002_J_Med_Entom,,,OvigRRV,Yes
+Shocket,EIP,20,293.15,10,NA,NA,NA,NA,Cann,MVEV,Kay_1989_MedVetEntom,,,CannMVEV,Yes
+Shocket,EIP,20,293.15,14,NA,NA,NA,NA,Cann,MVEV,Kay_1989_MedVetEntom,,,CannMVEV,Yes
+Shocket,EIP,27,300.15,10,NA,NA,NA,NA,Cann,MVEV,Kay_1989_MedVetEntom,,,CannMVEV,Yes
+Shocket,EIP,27,300.15,7,NA,NA,NA,NA,Cann,MVEV,Kay_1989_MedVetEntom,,,CannMVEV,Yes
+Shocket,EIP,33.5,306.65,4,NA,NA,NA,NA,Cann,MVEV,Kay_1989_MedVetEntom,,,CannMVEV,Yes
