@@ -58,3 +58,17 @@ ggplot(preds) +
   theme_bw()
 
 get_model_names()
+
+1 - as.numeric(c(TRUE, FALSE, FALSE, TRUE))
+
+for(i in 1:nrow(d)){
+  
+  if(d$temp[i] == 16){
+    d$rate[i] <- 1/d$rate[i]
+  }
+}
+
+# For Teleri - example of how to structure taking reciprical of some values
+data_test <- d |>
+  mutate(rate = if_else(temp > 28, rate, rate*100))
+
