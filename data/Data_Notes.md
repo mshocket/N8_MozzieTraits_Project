@@ -11,11 +11,15 @@ trait in format "EFD"  "EFOC" "EPR"  "pO"   "TFD"
 
 for mogi trait labeled ass EPR (eggs per raft) ovariole count 
 
-EFOC - Calculated from Total eggs / total females from 1st oviposition cycle; translated from Chinese paper	
+EFOC - eggs per female per oviposition cycle 
 
 EPR - egg per raft (ovipositing female), some are ovariole count
 
 pO - proportion ovipositing	
+
+tfd - total fecundity 
+
+efd eggs per female per day 
 
 ## MDR data
 mosquito development rate
@@ -33,13 +37,23 @@ for(i in 1:nrow(MDR_Data)){
 ```
 
 ## PDR data
+pathogen devolopment rate
 trait in format "EIP"  "PDR"
 
-extrinsic incubation?
+pathogen development rate
+
+extrinsic incubation period?
+inverse of each other 
 
 ## a data
-trait in format "a" and "GCD" - not sure what any of these stand for
+trait in format "a" and "GCD" 
 
+biting rate
+
+1/ gonatrophic cycle duration
+
+a is rate 
 
 ## pLA data
-traits all "pLA" - not sure what this stands for
+traits all "pLA" - 
+probability of surviving from larvae to adulthood
