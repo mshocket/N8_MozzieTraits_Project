@@ -1,20 +1,25 @@
-#Notes on format, ... of data 
+# Notes on format, ... of data 
 
 
-##Adult survival 
+## Adult survival 
 trait in format "1/mu"      "p"         "p/days"    "prop.dead"
 
-##fecundity data
-Trait Name rather than trait.name
+## fecundity data
+Trait Name rather than trait.name 
+
 trait in format "EFD"  "EFOC" "EPR"  "pO"   "TFD" 
+
 for mogi trait labeled ass EPR (eggs per raft) ovariole count 
 
 EFOC - Calculated from Total eggs / total females from 1st oviposition cycle; translated from Chinese paper	
-EPR - egg per raft (ovipositing female), some are ovariole count 
+
+EPR - egg per raft (ovipositing female), some are ovariole count
+
 pO - proportion ovipositing	
 
-##MDR data
+## MDR data
 mosquito development rate
+
 trait in format "MDR"  "1/MDR". Convert to 1/MDR (days)
 
 ```
@@ -27,13 +32,14 @@ for(i in 1:nrow(MDR_Data)){
 }
 ```
 
-##PDR data
+## PDR data
 trait in format "EIP"  "PDR"
+
 extrinsic incubation?
 
-##a data
+## a data
 trait in format "a" and "GCD" - not sure what any of these stand for
 
 
-##pLA data
+## pLA data
 traits all "pLA" - not sure what this stands for
