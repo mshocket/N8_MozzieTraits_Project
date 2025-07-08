@@ -2,8 +2,8 @@
 #setwd()
 
 #read in data
-mdr_data <- read.csv("data/MDR_Data.csv", stringsAsFactors = T)
-pla_data <- read.csv("data/pLA_Data.csv",stringsAsFactors = T)
+mdr_data <- read.csv("../data/MDR_Data.csv", stringsAsFactors = T)
+pla_data <- read.csv("../data/pLA_Data.csv",stringsAsFactors = T)
 
 names(mdr_data)
 names(pla_data)
