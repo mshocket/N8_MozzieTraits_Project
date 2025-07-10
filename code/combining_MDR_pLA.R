@@ -5,6 +5,20 @@
 mdr_data <- read.csv("../data/MDR_Data.csv", stringsAsFactors = T)
 pla_data <- read.csv("../data/pLA_Data.csv",stringsAsFactors = T)
 
+#convert all dev rates to days 
+for(i in 1:nrow(mdr_data)){
+  
+  if(mdr_data$trait.name[i] == "MDR"){
+    mdr_data$trait[i] <- 1/mdr_data$trait[i]
+  }
+}
+summary(mdr_data)
+
+#change trait name to reflect conversion
+mdr_data$trait.name <- as.factor("1/MDR")
+summary(mdr_data)
+
+#see var names for both datasets
 names(mdr_data)
 names(pla_data)
 
@@ -22,10 +36,15 @@ setdiff(mdr_vec,pla_vec) #this is just vars unique to mdr
 setdiff(pla_vec,mdr_vec) #this is just vars unique to pla
 
 #add additional vars to other dataset 
-pla_data$includes.egg <- "NA"
-pla_data$Increasing <- "NA"
+# pla_data$includes.egg <- "NA"
+# pla_data$Increasing <- "NA"
+
+#remove increasing and egg cols (egg stage sometimes included in dev time, increasing denotes portion before turnover)
+mdr_data <- subset(mdr_data, select = -c(includes.egg,Increasing))
+names(mdr_data)
 
 mdr_and_pla <- rbind(mdr_data,pla_data)
 
-#is there a better way of doing this final part?
+summary(mdr_and_pla)
+
 
