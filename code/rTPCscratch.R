@@ -47,6 +47,29 @@ mod <- nls_multstart(rate~atkin_2005(temp = temp, r0, a, b),
 # look at model fit
 summary(mod)
 
+#Get TPC characteristics
+get_topt(mod)
+get_ctmax(mod)
+get_ctmin(mod)
+get_breadth(mod, level = 0.5)
+get_rmax(mod)
+get_thermaltolerance(mod)
+
+#Get parameters and names
+coef(mod)
+coef(mod)[1]
+coef(mod)[1]+coef(mod)[2]
+as.numeric(coef(mod)[1])
+names(coef(mod))[1]
+
+# concatenate text - cat only prints to console, does not save as a variable
+printitem <- paste("ant", "bee", "cow", sep = "")
+
+# Get AIC score
+AIC(mod)
+BIC(mod)
+glance(mod)
+
 # get predictions
 preds <- data.frame(temp = seq(min(d$temp), max(d$temp), length.out = 100))
 preds <- broom::augment(mod, newdata = preds)
@@ -72,3 +95,34 @@ for(i in 1:nrow(d)){
 data_test <- d |>
   mutate(rate = if_else(temp > 28, rate, rate*100))
 
+fake_data <- data.frame(name = c("ant", "ant", "ant", "bee", "bee", "cow", "cow", "cow", "cow"),
+                        value = c(seq(1,9,1)))
+
+filt_data <- fake_data |>
+  filter(name == "ant" | name == "cow")
+
+filt_data <- fake_data |>
+  filter(name != c("bee"))
+
+filt_data <- fake_data |>
+  filter(name %in% c("ant", "bee"))
+
+
+##### Writing your own functions
+
+# Define a function
+VectorTPCshiny = function(species, trait, TPC){
+  
+  VTS_out <- paste(species, trait, TPC)
+  
+  return(VTS_out)
+  
+}
+
+# Give inputs for a function
+species <- "Aaeg"
+trait <- "1/MDR"
+TPC <- "atkins2005"
+
+# Run the function
+saved_output <- VectorTPCshiny(species, trait, TPC)
