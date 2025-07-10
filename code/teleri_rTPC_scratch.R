@@ -174,9 +174,17 @@ ggplot(d_preds, aes(temp, .fitted)) +
   geom_hline(aes(yintercept = 0), linetype = 2) +
   scale_color_brewer(type = 'qual', palette = 2)
 
-broom::glance(d_fits)
+AIC() # can't work out how to do this for the multiple models version
 
+d_ic <- d_stack %>%
+  mutate(., info = map(fit, glance), #this line gets aic and bic from glance, what is.?, don't fully understand what map does 
+         AICc =  map_dbl(fit, MuMIn::AICc)) %>%
+  select(-fit) %>%
+  unnest(info) %>%
+  select(model_name, AIC, AICc, BIC)
 
+d_ic
+?mutate
 # trying different models -----------
 get_model_names()
 # get start values and fit model
