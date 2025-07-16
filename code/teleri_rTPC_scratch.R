@@ -256,6 +256,52 @@ dat <- read.csv("data/Fecundity_Data.csv", stringsAsFactors = T)
 levels(dat$Trait.Name)
 summary(dat)
 
+#for loops
+vec <- c(3:4,6)
+numbers <- c()
+
+counts <- function(vec){
+for(val in vec) {
+  if(val == 1){ 
+    numbers <- paste(numbers, "one")
+    }
+  else if(val == 2){
+    numbers <- paste(numbers, "two")
+  }
+  else if(val == 3){
+    numbers <- paste(numbers, "three")
+  }
+  else if(val == 4){
+    numbers <- paste(numbers, "four")
+  }
+  else if(val == 5){
+    numbers <- paste(numbers, "five")
+  }
+  else if(val == 6){
+    numbers <- paste(numbers, "six")
+  }
+  else if(val == 7){
+    numbers <- paste(numbers, "seven")
+  }
+}
+  return(numbers)
+}
+
+counts(vec)
+
+#get params function
+
+get_parameters <- function(model){
+  mod_params <- c(AIC(model), get_ctmin(model), get_ctmax(model), get_topt(model), get_breadth(model), get_rmax(model), get_thermaltolerance(model), get_thermalsafetymargin(model), "param list")
+}
+
+
+
+output_table <- rbind(output_table, mod_params)
+
+
+
+
 #all data for papers ----
 
 a_Data <- read.csv("data/a_Data.csv", stringsAsFactors = T)
