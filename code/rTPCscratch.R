@@ -51,7 +51,7 @@ summary(mod)
 get_topt(mod)
 get_ctmax(mod)
 get_ctmin(mod)
-get_breadth(mod, level = 0.5)
+get_breadth(mod, level = 0.00009)
 get_rmax(mod)
 get_thermaltolerance(mod)
 
@@ -64,6 +64,22 @@ names(coef(mod))[1]
 
 # concatenate text - cat only prints to console, does not save as a variable
 printitem <- paste("ant", "bee", "cow", sep = "")
+paste(paste(names(coef(mod))[1], signif(coef(mod)[1], digits = 3), sep = ": "),
+      paste(names(coef(mod))[2], signif(coef(mod)[2], digits = 3), sep = ": "),
+      paste(names(coef(mod))[3], signif(coef(mod)[3], digits = 3), sep = ": "), sep = ", ")
+?paste
+
+# Turn this into function - takes coef(mod) and turn it into a single string
+vec <- character(length(coef(mod)))
+
+for(i in 1:length(coef(mod))){
+ vec[i] <- paste(names(coef(mod))[i], signif(coef(mod)[i], digits = 3), sep = ": ")
+}
+  
+coefs_out <- paste(vec, collapse = ", ")
+
+
+str(coefs_out)
 
 # Get AIC score
 AIC(mod)
