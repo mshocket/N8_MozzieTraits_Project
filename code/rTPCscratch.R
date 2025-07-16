@@ -124,7 +124,7 @@ filt_data <- fake_data |>
   filter(name %in% c("ant", "bee"))
 
 
-##### Writing your own functions
+##### Writing your own functions ----
 
 # Define a function
 VectorTPCshiny = function(species, trait, TPC){

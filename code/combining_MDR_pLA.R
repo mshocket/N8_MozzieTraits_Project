@@ -46,5 +46,8 @@ names(mdr_data)
 mdr_and_pla <- rbind(mdr_data,pla_data)
 
 summary(mdr_and_pla)
+getwd()
+
+#write.csv(mdr_and_pla,file='../data/MDR_and_pLA_Data.csv', row.names=FALSE)
 
 

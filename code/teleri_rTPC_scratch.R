@@ -174,9 +174,17 @@ ggplot(d_preds, aes(temp, .fitted)) +
   geom_hline(aes(yintercept = 0), linetype = 2) +
   scale_color_brewer(type = 'qual', palette = 2)
 
-broom::glance(d_fits)
+AIC() # can't work out how to do this for the multiple models version
 
+d_ic <- d_stack %>%
+  mutate(., info = map(fit, glance), #this line gets aic and bic from glance, what is.?, don't fully understand what map does 
+         AICc =  map_dbl(fit, MuMIn::AICc)) %>%
+  select(-fit) %>%
+  unnest(info) %>%
+  select(model_name, AIC, AICc, BIC)
 
+d_ic
+?mutate
 # trying different models -----------
 get_model_names()
 # get start values and fit model
@@ -247,6 +255,52 @@ get_model_names()
 dat <- read.csv("data/Fecundity_Data.csv", stringsAsFactors = T)
 levels(dat$Trait.Name)
 summary(dat)
+
+#for loops
+vec <- c(3:4,6)
+numbers <- c()
+
+counts <- function(vec){
+for(val in vec) {
+  if(val == 1){ 
+    numbers <- paste(numbers, "one")
+    }
+  else if(val == 2){
+    numbers <- paste(numbers, "two")
+  }
+  else if(val == 3){
+    numbers <- paste(numbers, "three")
+  }
+  else if(val == 4){
+    numbers <- paste(numbers, "four")
+  }
+  else if(val == 5){
+    numbers <- paste(numbers, "five")
+  }
+  else if(val == 6){
+    numbers <- paste(numbers, "six")
+  }
+  else if(val == 7){
+    numbers <- paste(numbers, "seven")
+  }
+}
+  return(numbers)
+}
+
+counts(vec)
+
+#get params function
+
+get_parameters <- function(model){
+  mod_params <- c(AIC(model), get_ctmin(model), get_ctmax(model), get_topt(model), get_breadth(model), get_rmax(model), get_thermaltolerance(model), get_thermalsafetymargin(model), "param list")
+}
+
+
+
+output_table <- rbind(output_table, mod_params)
+
+
+
 
 #all data for papers ----
 
