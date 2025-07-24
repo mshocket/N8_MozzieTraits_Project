@@ -5,8 +5,93 @@
 
 #set working directory
 setwd("~/Documents/GitHub/N8_MozzieTraits_Project/code")
+dat <- read.csv("../data/MDR_and_pLA_Data.csv", stringsAsFactors = T)
+
+selected_TPC <- c("quadratic_2008","briere1simplified_1999","thomas_2017", "deutsch_2008", "atkin_2005") #this worked without # as a list
+selected_species <- c("Aalb","Cpip","Ctar","Cqui")
+selected_trait <- "1/MDR"
+
+filt_data <- dat |>
+  filter(trait.name == selected_trait)|>
+  filter(host.code %in% selected_species) 
+
+preds <- data.frame(T.C = seq(min(filt_data$T.C), max(filt_data$T.C), length.out = 100))  
+
+output_table <- data.frame(Model = character(),
+                           AIC = numeric(),
+                           ct_min = numeric(),
+                           ct_max = numeric(),
+                           T_opt = numeric(),
+                           breadth = numeric(),
+                           r_max = numeric(),
+                           thermal_tolerance = numeric(),
+                           safetey_margin = numeric(),
+                           coeficients = character())
+
+start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = "quadratic_2008")
+
+# fit model
+mod <- nls_multstart(trait~quadratic_2008(temp = T.C, a, b, c),
+                     data = filt_data,
+                     iter = 200,
+                     start_lower = start_vals - 10,
+                     start_upper = start_vals + 10,
+                     lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = 'quadratic_2008'),
+                     upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = 'quadratic_2008'),
+                     supp_errors = 'Y',
+                     convergence_count = FALSE)
 
 
+# save_mod_params <- c("tpc",get_parameters(mod))
+# output_table |> add_row(save_mod_params)
+
+add_row_tpc = function(table_to_add_to, TPC, model) {
+  output_table_added <- table_to_add_to |>
+    add_row(Model = TPC,
+            AIC = AIC(model),
+            ct_min = get_ctmin(model),
+            ct_max = get_ctmax(model),
+            T_opt = get_topt(model),
+            breadth = get_breadth(model),
+            r_max = get_rmax(model),
+            thermal_tolerance = get_thermaltolerance(model),
+            safetey_margin = get_thermalsafetymargin(model),
+            coeficients = "coef_string(model)")
+  return(output_table_added)
+}
+
+output_table <- add_row_tpc(output_table, "quadratic_2008", mod)
+
+
+# get predictions
+preds <- broom::augment(mod, newdata = preds)
+preds <- rename(preds, quadratic_2008 = .fitted)
+
+
+
+start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = "thomas_2017")
+
+# fit model
+mod <- nls_multstart(trait~thomas_2017(temp = T.C, a, b, c, d, e),
+                     data = filt_data,
+                     iter = 200,
+                     start_lower = start_vals - 10,
+                     start_upper = start_vals + 10,
+                     lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = "thomas_2017"),
+                     upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = "thomas_2017"),
+                     supp_errors = 'Y',
+                     convergence_count = FALSE)
+
+# add parameter row to table
+output_table <- add_row_tpc(output_table, "thomas_2017", mod)
+
+
+# get predictions
+preds <- broom::augment(mod, newdata = preds)
+preds <- rename(preds, thomas_2017 = .fitted)
+
+
+#pivot_longer(preds, names_to = 'model_name', values_to = 'fit')
 # load packages
 library(rTPC)
 library(nls.multstart)
@@ -298,6 +383,45 @@ get_parameters <- function(model){
 
 
 output_table <- rbind(output_table, mod_params)
+
+
+# add_row_function <- function(results_table, model, tpc){
+#   results_table <- 
+#   add_row(results_table, 
+#           Model = tpc,
+#           AIC = AIC(model),
+#           ct_min = get_ctmin(model),
+#           ct_max = get_ctmax(model),
+#           T_opt = get_topt(model),
+#           breadth = get_breadth(model),
+#           r_max = get_rmax(model),
+#           thermal_tolerance = get_thermaltolerance(model),
+#           safetey_margin = get_thermalsafetymargin(model),
+#           coeficients = coef_string(model))
+# return(output_table)
+# }
+
+
+
+
+
+# Turn this into function - takes coef(mod) and turn it into a single string
+
+coef_string <- function(model){
+  vec <- character(length(coef(mod)))
+  
+  for(i in 1:length(coef(mod))){
+    vec[i] <- paste(names(coef(mod))[i], signif(coef(mod)[i], digits = 3), sep = ": ")
+  }
+  coefs_out <- paste(vec, collapse = ", ")
+  return(coefs_out)
+}
+
+coef_string(mod)
+
+coefs_out <- paste(vec, collapse = ", ")
+coefs_out
+
 
 
 

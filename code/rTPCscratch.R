@@ -77,7 +77,7 @@ for(i in 1:length(coef(mod))){
 }
   
 coefs_out <- paste(vec, collapse = ", ")
-
+coefs_out
 
 str(coefs_out)
 
