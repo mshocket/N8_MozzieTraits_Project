@@ -451,3 +451,48 @@ cits <- as.vector(c(levels(a_Data$Citation),
 sum(duplicated(cits))
 
 citations <- unique(cits)
+
+
+#previous plot code #####
+i <- 1
+while(i <= length(selected_TPC)) {
+  
+  #could this section be a function???
+  
+  if("atkin_2005" %in% selected_TPC){
+    curve_plot <- curve_plot + 
+      geom_line(aes(T.C, atkin_2005), col = pal[[i]]) 
+    i <- i+1
+  }
+  if("quadratic_2008" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, quadratic_2008), col = pal[[i]])
+    
+    i <- i+1
+  }
+  if("thomas_2017" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, thomas_2017), col = pal[[i]])
+    
+    i <- i+1
+  }
+  if("briere1simplified_1999" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, briere1simplified_1999), col = pal[[i]])
+    i <- i+1
+  }
+  if("deutsch_2008" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, deutsch_2008), col = pal[[i]])
+    i <- i+1
+  }
+  if("flextpc_2024" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, flextpc_2024), col = pal[[i]])
+    i <- i+1
+  }
+  if("sharpeschoolhigh_1981" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, sharpeschoolhigh_1981), col = pal[[i]])
+    i <- i+1
+  }
+  if("sharpeschoollow_1981" %in% selected_TPC) {
+    curve_plot <- curve_plot + geom_line(aes(T.C, sharpeschoollow_1981), col = pal[[i]])
+    i <- i+1
+  }
+  
+}

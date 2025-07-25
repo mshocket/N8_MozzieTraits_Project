@@ -8,14 +8,14 @@ pla_data <- read.csv("../data/pLA_Data.csv",stringsAsFactors = T)
 #convert all dev rates to days 
 for(i in 1:nrow(mdr_data)){
   
-  if(mdr_data$trait.name[i] == "MDR"){
+  if(mdr_data$trait.name[i] == "1/MDR"){
     mdr_data$trait[i] <- 1/mdr_data$trait[i]
   }
 }
 summary(mdr_data)
 
 #change trait name to reflect conversion
-mdr_data$trait.name <- as.factor("1/MDR")
+mdr_data$trait.name <- as.factor("MDR")
 summary(mdr_data)
 
 #see var names for both datasets
