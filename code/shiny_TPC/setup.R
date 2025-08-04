@@ -5,12 +5,11 @@ library(broom)
 library(tidyverse)
 library(viridis) 
 library(RColorBrewer)
-library(ggrepel)
 
 
 #to add a new models - add to model options
-                  #  - add to mod rename function
-                  #  - add fitting model to list of ifs
+#  - add to mod rename function
+#  - add fitting model to list of ifs
 
 #data in####
 
@@ -23,10 +22,7 @@ selected_TPC <- c("deutsch_2008", "atkin_2005", "briere1simplified_1999") #this 
 selected_species <- c("Aalb","Cpip","Ctar","Cqui")
 selected_trait <- "MDR"
 
-model_options <- c("atkin_2005",  "quadratic_2008","thomas_2017", "briere1simplified_1999", "deutsch_2008", "flextpc_2024")
-
-#"sharpeschoolhigh_1981", "sharpeschoollow_1981", #"sharpeschoolfull_1981")
-
+model_options <- c("atkin_2005",  "quadratic_2008","thomas_2017", "briere1simplified_1999", "deutsch_2008", "flextpc_2024", "sharpeschoolhigh_1981", "sharpeschoollow_1981", "sharpeschoolfull_1981")
 species_options <- levels(dat$host.code)
 trait_options <- levels(dat$trait.name)
 
@@ -56,13 +52,13 @@ get_parameters <- function(model){
 
 #define function to extract string of model coeficients
 coef_string <- function(model){
-vec <- character(length(coef(model)))
-
-for(i in 1:length(coef(model))){
-  vec[i] <- paste(names(coef(model))[i], signif(coef(model)[i], digits = 3), sep = ": ")
-}
-coefs_out <- paste(vec, collapse = ", ")
-return(coefs_out)
+  vec <- character(length(coef(model)))
+  
+  for(i in 1:length(coef(model))){
+    vec[i] <- paste(names(coef(model))[i], signif(coef(model)[i], digits = 3), sep = ": ")
+  }
+  coefs_out <- paste(vec, collapse = ", ")
+  return(coefs_out)
 }
 
 #function to create a vector of tidy names
@@ -73,9 +69,9 @@ model_rename <- function(model_name){
   else if(model_name == "briere1simplified_1999") {"Briere"}
   else if(model_name == "deutsch_2008") {"Deutsch"}
   else if(model_name == "flextpc_2024") {"Flex TPC"}
-  # else if(model_name == "sharpeschoolhigh_1981") {"Sharpe-School high"}
-  # else if(model_name == "sharpeschoollow_1981") {"Sharpe-School low"}
-  # else if(model_name == "sharpeschoolfull_1981") {"Sharpe-School full"}
+  else if(model_name == "sharpeschoolhigh_1981") {"Sharpe-School high"}
+  else if(model_name == "sharpeschoollow_1981") {"Sharpe-School low"}
+  else if(model_name == "sharpeschoolfull_1981") {"Sharpe-School full"}
   
 }
 
@@ -86,16 +82,16 @@ trait_rename <- function(trait_name) {
 
 # Define the main function ####
 
-shiny_TPC = function(TRAIT, SPECIES, MODEL){
- 
+shiny_TPC = function(trait, species){
+  
   # set up ----
-   
+  
   #create df of selected trait/species - from interface, will change in shiny
   filt_data <- dat |>
-  filter(trait.name == TRAIT)|>
-  filter(host.code %in% SPECIES)
+    filter(trait.name == selected_trait)|>
+    filter(host.code %in% selected_species) 
   
-
+  
   #create first column of predictions df 
   preds <- data.frame(T.C = seq(min(filt_data$T.C), max(filt_data$T.C), length.out = 100))  
   
@@ -111,19 +107,19 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
                              thermal_tolerance = numeric(),
                              safetey_margin = numeric(),
                              coeficients = character())
-
+  
   n_iterations <- 200
   
   # loop through each model----
   
-  for (tpc in MODEL){
+  for (tpc in selected_TPC){
     
     #atkin still has mod name instead of tpc for checking 
     if(tpc == "atkin_2005"){
-
+      
       #fitting model
       start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = "atkin_2005")
-
+      
       # fit model
       mod <- nls_multstart(trait~atkin_2005(temp = T.C, r0, a, b),
                            data = filt_data,
@@ -137,7 +133,7 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
       
       # add parameter row to table
       output_table <- add_row_tpc(output_table, "atkin_2005", mod)
-
+      
       # get predictions
       preds <- broom::augment(mod, newdata = preds)
       preds <- rename(preds, atkin_2005 = .fitted)
@@ -166,9 +162,9 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
       preds <- rename(preds, quadratic_2008 = .fitted)
     }
     else if(tpc == "briere1simplified_1999"){
-
+      
       start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = tpc)
-
+      
       # fit model
       mod <- nls_multstart(trait~briere1simplified_1999(temp = T.C, tmin, tmax, a),
                            data = filt_data,
@@ -179,37 +175,37 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
                            upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
                            supp_errors = 'Y',
                            convergence_count = FALSE)
-
-
+      
+      
       # add parameter row to table
       output_table <- add_row_tpc(output_table, tpc, mod)
-
+      
       # get predictions
       preds <- broom::augment(mod, newdata = preds)
       preds <- rename(preds, briere1simplified_1999 = .fitted)
     }
     else if (tpc == "thomas_2017") {
-
-    start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = tpc)
-
-    # fit model
-    mod <- nls_multstart(trait~thomas_2017(temp = T.C, a, b, c, d, e),
-                         data = filt_data,
-                         iter = n_iterations,
-                         start_lower = start_vals - 10,
-                         start_upper = start_vals + 10,
-                         lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
-                         upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
-                         supp_errors = 'Y',
-                         convergence_count = FALSE)
-
-    # add parameter row to table
-    output_table <- add_row_tpc(output_table, tpc, mod)
-
-
-    # get predictions
-    preds <- broom::augment(mod, newdata = preds)
-    preds <- rename(preds, thomas_2017 = .fitted)
+      
+      start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = tpc)
+      
+      # fit model
+      mod <- nls_multstart(trait~thomas_2017(temp = T.C, a, b, c, d, e),
+                           data = filt_data,
+                           iter = n_iterations,
+                           start_lower = start_vals - 10,
+                           start_upper = start_vals + 10,
+                           lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
+                           upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
+                           supp_errors = 'Y',
+                           convergence_count = FALSE)
+      
+      # add parameter row to table
+      output_table <- add_row_tpc(output_table, tpc, mod)
+      
+      
+      # get predictions
+      preds <- broom::augment(mod, newdata = preds)
+      preds <- rename(preds, thomas_2017 = .fitted)
     }
     else if (tpc == "deutsch_2008") {
       
@@ -232,28 +228,28 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
       # get predictions
       preds <- broom::augment(mod, newdata = preds)
       preds <- rename(preds, deutsch_2008 = .fitted)
-      }
+    }
     else if (tpc == "flextpc_2024") {      
       
       start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = tpc)
-    
-    # fit model
-    mod <- nls_multstart(trait~flextpc_2024(temp = T.C, tmin, tmax, rmax, alpha, beta),
-                         data = filt_data,
-                         iter = n_iterations,
-                         start_lower = start_vals - 10,
-                         start_upper = start_vals + 10,
-                         lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
-                         upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
-                         supp_errors = 'Y',
-                         convergence_count = FALSE)
-    
-    # add parameter row to table
-    output_table <- add_row_tpc(output_table, tpc, mod)
-    
-    # get predictions
-    preds <- broom::augment(mod, newdata = preds)
-    preds <- rename(preds, flextpc_2024 = .fitted)}
+      
+      # fit model
+      mod <- nls_multstart(trait~flextpc_2024(temp = T.C, tmin, tmax, rmax, alpha, beta),
+                           data = filt_data,
+                           iter = n_iterations,
+                           start_lower = start_vals - 10,
+                           start_upper = start_vals + 10,
+                           lower = get_lower_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
+                           upper = get_upper_lims(filt_data$T.C, filt_data$trait, model_name = tpc),
+                           supp_errors = 'Y',
+                           convergence_count = FALSE)
+      
+      # add parameter row to table
+      output_table <- add_row_tpc(output_table, tpc, mod)
+      
+      # get predictions
+      preds <- broom::augment(mod, newdata = preds)
+      preds <- rename(preds, flextpc_2024 = .fitted)}
     else if (tpc == "sharpeschoolhigh_1981") {      
       
       start_vals <- get_start_vals(filt_data$T.C, filt_data$trait, model_name = tpc)
@@ -319,12 +315,12 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
       preds <- rename(preds, sharpeschoolfull_1981 = .fitted)}
     
   }
-    
-
+  
+  
   # create outputs ------
   
   #create long df with col of mod names and col of preds (temps repeated)
-  long_preds <- preds |>
+  long_preds <- preds %>%
     pivot_longer(cols = - T.C,
                  names_to = "model_name",
                  values_to = "pred_val")
@@ -339,25 +335,21 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
     )
   
   
-  #plot 
-  
-  base_plot <-  ggplot(filt_data, aes(T.C, trait)) +
+  #plot data point only
+  curve_plot <- ggplot(filt_data, aes(T.C, trait)) +
     geom_point(alpha = 1/5, shape = 16) +
-    geom_hline(aes(yintercept = 0), linetype = 2, color = "grey30") +
-    theme_bw(base_size = 16) +
+    geom_line(data=long_preds, aes(x = T.C, y = pred_val, colour= tidy_name)) +
+    geom_hline(aes(yintercept = 0), linetype = 2) +
+    theme_bw(base_size = 12) +
     labs(x = 'Temperature (ºC)',
-         y = filt_data$y_axis_name) 
-    
-  
-  curve_plot <- base_plot +
-    geom_line(data=long_preds, aes(x = T.C, y = pred_val, colour= tidy_name), lwd = 0.8) +
-    labs(title = '',
+         y = filt_data$y_axis_name,
+         title = '',
          color = "Model") +
-    scale_color_brewer(type = 'qual', palette = 2)
-    # scale_color_viridis(discrete= T, option = "viridis")
-
+    # scale_color_brewer(type = 'qual', palette = 2)
+    scale_color_viridis(discrete= T, option = "virdis")
+  
   #not important but trying to figure out, maybe add a col to long preds? is it usefull to still be able to tell the other models appart
-  best_model = filter(output_table, AIC == min(AIC)) |> 
+  best_model = filter(output_table, AIC == min(AIC)) %>% 
     pull(Model)
   
   for (i in 1:nrow(long_preds)) {
@@ -365,28 +357,30 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
     else {"not best"}
   }
   
-  best_mod_plot <- base_plot +
-    geom_line(data = filter(long_preds, model_name == best_model), aes(x = T.C, y = pred_val), lwd = 2, col = "yellow") +
-    geom_line(data=long_preds, aes(x = T.C, y = pred_val, col = tidy_name), lwd = 0.8, linetype = 2 ) +
-    labs(title = 'best mod',
+  best_mod_plot <- ggplot(filt_data, aes(T.C, trait)) +
+    geom_point(alpha = 1/4, shape = 16) +
+    geom_line(data=long_preds, aes(x = T.C, y = pred_val, col = tidy_name), lwd = 0.6 ) +
+    #geom_line(data = filter(long_preds, model_name == best_model), aes(x = T.C, y = pred_val)) +
+    geom_hline(aes(yintercept = 0), linetype = 2) +
+    theme_bw(base_size = 12) +
+    labs(x = 'Temperature (ºC)',
+         y = filt_data$y_axis_name,
+         title = '',
          color = "Model") +
-    scale_color_brewer(type = 'qual', palette = 2)
-    #scale_color_viridis(discrete= T, option = "viridis")
+    #scale_color_brewer(type = 'qual', palette = 2)
+    scale_color_viridis(discrete= T, option = "viridis")
   
-    
-  return(list(curve_plot,
-              output_table, 
-              best_mod_plot
-              ))
-  }
+  
+  return(list(curve_plot, output_table, best_mod_plot))
+}
 
 
-saved_output <- shiny_TPC(selected_trait, selected_species, selected_TPC)
+saved_output <- shiny_TPC(selected_trait,selected_species)
 print(saved_output[[1]])
 print(saved_output[[2]])
+print(saved_output[[3]])
 
 
-print(saved_output)
 
 
 
