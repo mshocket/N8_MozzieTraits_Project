@@ -5,41 +5,66 @@ library(broom)
 library(tidyverse)
 library(viridis) 
 library(RColorBrewer)
+library(ggrepel)
 
-
-#to add a new models - add to model options
-#  - add to mod rename function
-#  - add fitting model to list of ifs
 
 #data in####
 
 #load data
 dat <- read.csv("../data/MDR_and_pLA_Data.csv", stringsAsFactors = T)
 
-show_lowest_aic <- "yes"
+#function for renaming species to full name
+species_rename <- function(species_name) {
+  if(species_name == "Aaeg") {"Ae. aegypti"}
+  else if(species_name == "Aalb") {"Ae. albopictus"}
+  else if(species_name == "Agam") {"An. gambiae"}
+  else if(species_name == "Anig") {"x"}
+  else if(species_name == "Anot") {"Ae. notoscriptus"}
+  else if(species_name == "Asol") {"Ae. sollicitans"}
+  else if(species_name == "Atri") {"Ae. triseriatus"}
+  else if(species_name == "Avex") {"Ae. vexans"}
+  else if(species_name == "Cann") {"Cx. annulirostris"}
+  else if(species_name == "Cino") {"y"}
+  else if(species_name == "Cmel") {"Cs. melanura"}
+  else if(species_name == "Cmol") {"Cx. pipiens molestus"}
+  else if(species_name == "Cpal") {"z"}
+  else if(species_name == "Cpip") {"Cx. pipiens"}
+  else if(species_name == "Cqui") {"Cx. quinquefasciatus"}
+  else if(species_name == "Cres") {"Cx.restuans"}
+  else if(species_name == "Csal") {"Cx. salinarius"}
+  else if(species_name == "Ctar") {"Cx. tarsalis"}
+  else if(species_name == "Ocam") {"Ae. camptorhynchus"}
+  else if(species_name == "Trut") {"Tx. rutilus"}
+  else {"unknown"}
+  
+  
+}
 
-selected_TPC <- c("deutsch_2008", "atkin_2005", "briere1simplified_1999") #this worked without # as a list
-selected_species <- c("Aalb","Cpip","Ctar","Cqui")
-selected_trait <- "MDR"
+#create col for full name and as factor 
+dat <- dat |>
+  mutate(sp_name = map_chr(dat$host.code, species_rename)
+  )
+dat$sp_name <- as.factor(dat$sp_name)
 
-model_options <- c("atkin_2005",  "quadratic_2008","thomas_2017", "briere1simplified_1999", "deutsch_2008", "flextpc_2024", "sharpeschoolhigh_1981", "sharpeschoollow_1981", "sharpeschoolfull_1981")
-species_options <- levels(dat$host.code)
+#current  options - this may need changinging when made generic
+model_options <- c("atkin_2005",  "quadratic_2008","thomas_2017", "briere1simplified_1999", "deutsch_2008", "flextpc_2024")
+species_options <- levels(dat$sp_name)
 trait_options <- levels(dat$trait.name)
 
-#define small functions ####
 
+#define small functions ####
 
 add_row_tpc = function(table_to_add_to, TPC, model) {
   output_table_added <- table_to_add_to |>
     add_row(Model = TPC,
             AIC = AIC(model),
-            ct_min = get_ctmin(model),
-            ct_max = get_ctmax(model),
+            CT_min = get_ctmin(model),
+            CT_max = get_ctmax(model),
             T_opt = get_topt(model),
             breadth = get_breadth(model, level = 0.1),
             r_max = get_rmax(model),
             thermal_tolerance = get_thermaltolerance(model),
-            safetey_margin = get_thermalsafetymargin(model),
+            safety_margin = get_thermalsafetymargin(model),
             coeficients = coef_string(model))
   return(output_table_added)
 }
@@ -69,27 +94,24 @@ model_rename <- function(model_name){
   else if(model_name == "briere1simplified_1999") {"Briere"}
   else if(model_name == "deutsch_2008") {"Deutsch"}
   else if(model_name == "flextpc_2024") {"Flex TPC"}
-  else if(model_name == "sharpeschoolhigh_1981") {"Sharpe-School high"}
-  else if(model_name == "sharpeschoollow_1981") {"Sharpe-School low"}
-  else if(model_name == "sharpeschoolfull_1981") {"Sharpe-School full"}
-  
 }
 
 trait_rename <- function(trait_name) {
   if(trait_name == "pLA") {"Proportion survived from larvae to adulthood"}
-  else if(trait_name == "MDR") {"Mosquito development rate (1/days)"}
+  else if(trait_name == "MDR") {"Mosquito development rate (days^1)"}
 }
+expression(paste(" ",R^2 ,"= 0.647"))
 
 # Define the main function ####
 
-shiny_TPC = function(trait, species){
+shiny_TPC = function(TRAIT, SPECIES, MODEL){
   
   # set up ----
   
   #create df of selected trait/species - from interface, will change in shiny
   filt_data <- dat |>
-    filter(trait.name == selected_trait)|>
-    filter(host.code %in% selected_species) 
+    filter(trait.name == TRAIT)|>
+    filter(sp_name %in% SPECIES)
   
   
   #create first column of predictions df 
@@ -99,20 +121,20 @@ shiny_TPC = function(trait, species){
   #create empty output table,specify data type to get empty rows
   output_table <- data.frame(Model = character(),
                              AIC = numeric(),
-                             ct_min = numeric(),
-                             ct_max = numeric(),
+                             CT_min = numeric(),
+                             CT_max = numeric(),
                              T_opt = numeric(),
                              breadth = numeric(),
                              r_max = numeric(),
                              thermal_tolerance = numeric(),
-                             safetey_margin = numeric(),
+                             safety_margin = numeric(),
                              coeficients = character())
   
   n_iterations <- 200
   
   # loop through each model----
   
-  for (tpc in selected_TPC){
+  for (tpc in MODEL){
     
     #atkin still has mod name instead of tpc for checking 
     if(tpc == "atkin_2005"){
@@ -320,7 +342,7 @@ shiny_TPC = function(trait, species){
   # create outputs ------
   
   #create long df with col of mod names and col of preds (temps repeated)
-  long_preds <- preds %>%
+  long_preds <- preds |>
     pivot_longer(cols = - T.C,
                  names_to = "model_name",
                  values_to = "pred_val")
@@ -335,21 +357,25 @@ shiny_TPC = function(trait, species){
     )
   
   
-  #plot data point only
-  curve_plot <- ggplot(filt_data, aes(T.C, trait)) +
+  #plot 
+  
+  base_plot <-  ggplot(filt_data, aes(T.C, trait)) +
     geom_point(alpha = 1/5, shape = 16) +
-    geom_line(data=long_preds, aes(x = T.C, y = pred_val, colour= tidy_name)) +
-    geom_hline(aes(yintercept = 0), linetype = 2) +
-    theme_bw(base_size = 12) +
+    geom_hline(aes(yintercept = 0), linetype = 2, color = "grey30") +
+    theme_bw(base_size = 16) +
     labs(x = 'Temperature (ºC)',
-         y = filt_data$y_axis_name,
-         title = '',
+         y = filt_data$y_axis_name) 
+  
+  
+  curve_plot <- base_plot +
+    geom_line(data=long_preds, aes(x = T.C, y = pred_val, colour= tidy_name), lwd = 0.8) +
+    labs(title = '',
          color = "Model") +
-    # scale_color_brewer(type = 'qual', palette = 2)
-    scale_color_viridis(discrete= T, option = "virdis")
+    scale_color_brewer(type = 'qual', palette = 2)
+  # scale_color_viridis(discrete= T, option = "viridis")
   
   #not important but trying to figure out, maybe add a col to long preds? is it usefull to still be able to tell the other models appart
-  best_model = filter(output_table, AIC == min(AIC)) %>% 
+  best_model = filter(output_table, AIC == min(AIC)) |> 
     pull(Model)
   
   for (i in 1:nrow(long_preds)) {
@@ -357,28 +383,21 @@ shiny_TPC = function(trait, species){
     else {"not best"}
   }
   
-  best_mod_plot <- ggplot(filt_data, aes(T.C, trait)) +
-    geom_point(alpha = 1/4, shape = 16) +
-    geom_line(data=long_preds, aes(x = T.C, y = pred_val, col = tidy_name), lwd = 0.6 ) +
-    #geom_line(data = filter(long_preds, model_name == best_model), aes(x = T.C, y = pred_val)) +
-    geom_hline(aes(yintercept = 0), linetype = 2) +
-    theme_bw(base_size = 12) +
-    labs(x = 'Temperature (ºC)',
-         y = filt_data$y_axis_name,
-         title = '',
+  best_mod_plot <- base_plot +
+    geom_line(data = filter(long_preds, model_name == best_model), aes(x = T.C, y = pred_val), lwd = 2, col = "yellow") +
+    geom_line(data=long_preds, aes(x = T.C, y = pred_val, col = tidy_name), lwd = 0.8, linetype = 2 ) +
+    labs(title = 'best mod',
          color = "Model") +
-    #scale_color_brewer(type = 'qual', palette = 2)
-    scale_color_viridis(discrete= T, option = "viridis")
+    scale_color_brewer(type = 'qual', palette = 2)
+  #scale_color_viridis(discrete= T, option = "viridis")
   
   
-  return(list(curve_plot, output_table, best_mod_plot))
+  return(list(curve_plot,
+              output_table, 
+              best_mod_plot
+  ))
 }
 
-
-saved_output <- shiny_TPC(selected_trait,selected_species)
-print(saved_output[[1]])
-print(saved_output[[2]])
-print(saved_output[[3]])
 
 
 

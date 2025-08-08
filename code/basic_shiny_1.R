@@ -17,6 +17,8 @@ library(ggrepel)
 #load data
 dat <- read.csv("../data/MDR_and_pLA_Data.csv", stringsAsFactors = T)
 
+
+
 show_lowest_aic <- "yes"
 
 selected_TPC <- c("deutsch_2008", "atkin_2005", "briere1simplified_1999") #this worked without # as a list
@@ -43,7 +45,7 @@ add_row_tpc = function(table_to_add_to, TPC, model) {
             breadth = get_breadth(model, level = 0.1),
             r_max = get_rmax(model),
             thermal_tolerance = get_thermaltolerance(model),
-            safetey_margin = get_thermalsafetymargin(model),
+            safety_margin = get_thermalsafetymargin(model),
             coeficients = coef_string(model))
   return(output_table_added)
 }
@@ -81,9 +83,9 @@ model_rename <- function(model_name){
 
 trait_rename <- function(trait_name) {
   if(trait_name == "pLA") {"Proportion survived from larvae to adulthood"}
-  else if(trait_name == "MDR") {"Mosquito development rate (1/days)"}
+  else if(trait_name == "MDR") {"Mosquito development rate (days^1)"}
 }
-
+expression(paste(" ",R^2 ,"= 0.647"))
 # Define the main function ####
 
 shiny_TPC = function(TRAIT, SPECIES, MODEL){
@@ -109,7 +111,7 @@ shiny_TPC = function(TRAIT, SPECIES, MODEL){
                              breadth = numeric(),
                              r_max = numeric(),
                              thermal_tolerance = numeric(),
-                             safetey_margin = numeric(),
+                             safety_margin = numeric(),
                              coeficients = character())
 
   n_iterations <- 200
