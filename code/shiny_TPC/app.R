@@ -1,23 +1,37 @@
 library(shiny)
 library(bslib)
+library(bsicons)
 library(shinyWidgets)
 library(shinythemes)
 
 # Define UI ----
 ui <- page_sidebar(
-  theme = shinythemes::shinytheme("flatly"),
+  #theme = shinythemes::shinytheme("flatly"),
+  theme = bs_theme(preset = "shiny"),
   title = "These models are run using the rTPC package in R.",
   sidebar = sidebar(
     helpText("Select what models to fit and what data to include"),
     title = "Model Controls",
     
     ##choose trait -----
-    card(
+    layout_columns(
       radioButtons(inputId = "trait",
                    "Trait:",
                    levels(dat$trait.name)
-      )
+      ),
+      tooltip(
+        bsicons::bs_icon("info-circle", title = "About tooltips"),
+        "Text shown in the tooltip.",
+        placement = "bottom"
+      ),
+      tooltip(
+        bsicons::bs_icon("info-circle", title = "About tooltips"),
+        "Text shown in the tooltip2.",
+        placement = "bottom"
+      ),
+      col_widths = c(6,6,6)
     ),
+   
     
     ##choose species -----
     pickerInput(
@@ -54,7 +68,7 @@ ui <- page_sidebar(
   ),
 
   ##output cards -----
-  
+  layout_columns(
   navset_card_tab(
     nav_panel("Plot", plotOutput('plot1')), 
     nav_panel("Table", tableOutput("table1"),
@@ -62,9 +76,10 @@ ui <- page_sidebar(
               downloadButton("downloadData", "Download")
               )
     ),
-  
-  textOutput("selected_species"),
+  card(textOutput("selected_species"),
   textOutput("selected_model")
+  ),
+  col_widths = c(9,3))
 )
 
 
