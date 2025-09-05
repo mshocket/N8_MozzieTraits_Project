@@ -14,20 +14,19 @@ ui <- page_sidebar(
     title = "Model Controls",
     
     ##choose trait -----
-    layout_columns(
+     layout_columns(
       radioButtons(inputId = "trait",
                    "Trait:",
                    levels(dat$trait.name)
       ),
-      tooltip(
-        bsicons::bs_icon("info-circle", title = "About tooltips"),
-        "Text shown in the tooltip.",
-        placement = "bottom"
-      ),
-      tooltip(
-        bsicons::bs_icon("info-circle", title = "About tooltips"),
+     # tooltip(
+     #    bsicons::bs_icon("info-circle", title = "About tooltips"),
+     #    "Text shown in the tooltip.",
+     #    placement = "bottom"
+     #  ),
+      tooltip( bsicons::bs_icon("info-circle", title = "About tooltips"),
         "Text shown in the tooltip2.",
-        placement = "bottom"
+        placement = "left"
       ),
       col_widths = c(6,6,6)
     ),

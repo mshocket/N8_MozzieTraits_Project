@@ -11,23 +11,23 @@ library(ggrepel)
 #data in####
 
 #load data
-dat <- read.csv("../data/MDR_and_pLA_Data.csv", stringsAsFactors = T)
+dat <- read.csv("../../data/MDR_and_pLA_Data.csv", stringsAsFactors = T)
 
 #function for renaming species to full name
 species_rename <- function(species_name) {
   if(species_name == "Aaeg") {"Ae. aegypti"}
   else if(species_name == "Aalb") {"Ae. albopictus"}
   else if(species_name == "Agam") {"An. gambiae"}
-  else if(species_name == "Anig") {"x"}
+  else if(species_name == "Anig") {"Ae. nigromaculis"}
   else if(species_name == "Anot") {"Ae. notoscriptus"}
   else if(species_name == "Asol") {"Ae. sollicitans"}
   else if(species_name == "Atri") {"Ae. triseriatus"}
   else if(species_name == "Avex") {"Ae. vexans"}
   else if(species_name == "Cann") {"Cx. annulirostris"}
-  else if(species_name == "Cino") {"y"}
+  else if(species_name == "Cino") {"Cs. inornata"}
   else if(species_name == "Cmel") {"Cs. melanura"}
   else if(species_name == "Cmol") {"Cx. pipiens molestus"}
-  else if(species_name == "Cpal") {"z"}
+  else if(species_name == "Cpal") {"Cx. pipiens pallens"}
   else if(species_name == "Cpip") {"Cx. pipiens"}
   else if(species_name == "Cqui") {"Cx. quinquefasciatus"}
   else if(species_name == "Cres") {"Cx.restuans"}
